@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="description" content="FunLearn – Interactive LKG learning for Indian kids. ABC, 123, Colors, Animals in English, Hindi and Kannada!">
+  <meta name="theme-color" content="#6C3FC5">
+  <title>🌈 FunLearn – LKG Magic World</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700;800&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<canvas id="explosionCanvas"></canvas>
+
+<!-- LOGIN PAGE -->
+<div id="loginPage">
+  <div class="stars-bg"></div>
+  <div class="login-box">
+    <div class="login-logo">🌈</div>
+    <div class="login-title">FunLearn</div>
+    <div class="login-sub">Magic Learning World</div>
+
+    <div class="mascot-section">
+      <span class="mascot-current" id="loginMascot" title="Tap to change">🦄</span>
+      <span class="mascot-hint">Tap to change!</span>
+    </div>
+    <div class="mascot-picker" id="mascotPicker"></div>
+
+    <input class="login-input" id="nameInput" type="text"
+      placeholder="What's your name? 😊" maxlength="20" autocomplete="off">
+
+    <button class="login-btn" id="loginBtn">
+      <span>Let's Go!</span> 🚀
+    </button>
+
+    <div class="login-langs">🇬🇧 English &nbsp;•&nbsp; 🇮🇳 हिन्दी &nbsp;•&nbsp; 🇮🇳 ಕನ್ನಡ</div>
+  </div>
+</div>
+
+<!-- MAIN APP -->
+<div id="mainApp" style="display:none">
+
+  <div class="bg-shapes">
+    <div class="bg-circle c1"></div>
+    <div class="bg-circle c2"></div>
+    <div class="bg-circle c3"></div>
+    <div class="floating-star s1">⭐</div>
+    <div class="floating-star s2">🌟</div>
+    <div class="floating-star s3">✨</div>
+    <div class="floating-star s4">💫</div>
+  </div>
+
+  <!-- HEADER -->
+  <header>
+    <div class="header-inner">
+      <div class="header-left">
+        <button class="mascot-btn" id="headerMascot" title="Change mascot">🦄</button>
+        <div class="header-brand">
+          <div class="header-logo">FunLearn 🌈</div>
+          <div class="header-greeting" id="greetingBar">Hello!</div>
+        </div>
+      </div>
+      <div class="header-right">
+        <!-- Language -->
+        <div class="lang-selector">
+          <button class="lang-btn active" data-lang="en">EN</button>
+          <button class="lang-btn" data-lang="hi">हि</button>
+          <button class="lang-btn" data-lang="kn">ಕ</button>
+        </div>
+        <!-- Mute -->
+        <button class="mute-btn" id="muteBtn" title="Toggle sound">
+          <span id="muteIcon">🔊</span>
+        </button>
+        <!-- Stars badge -->
+        <button class="awards-btn" data-tab="awards" title="My Awards">
+          🏆 <span class="star-count-badge" id="starBadge">0</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- NAV -->
+  <nav class="nav-tabs" id="navTabs">
+    <button class="tab-btn active" data-tab="alphabets">
+      <span class="tab-icon">🔤</span>
+      <span class="tab-label">ABC</span>
+    </button>
+    <button class="tab-btn" data-tab="numbers">
+      <span class="tab-icon">🔢</span>
+      <span class="tab-label">123</span>
+    </button>
+    <button class="tab-btn" data-tab="colors">
+      <span class="tab-icon">🎨</span>
+      <span class="tab-label">Colors</span>
+    </button>
+    <button class="tab-btn" data-tab="animals">
+      <span class="tab-icon">🐘</span>
+      <span class="tab-label">Animals</span>
+    </button>
+    <button class="tab-btn" data-tab="quiz">
+      <span class="tab-icon">🧠</span>
+      <span class="tab-label">Quiz</span>
+    </button>
+    <button class="tab-btn" data-tab="drawing">
+      <span class="tab-icon">✏️</span>
+      <span class="tab-label">Draw</span>
+    </button>
+    <button class="tab-btn" data-tab="scripts">
+      <span class="tab-icon">🔡</span>
+      <span class="tab-label">Scripts</span>
+    </button>
+  </nav>
+
+  <!-- CONTENT -->
+  <main class="content-area">
+
+    <!-- ALPHABETS -->
+    <div class="section active" id="sec-alphabets">
+      <div class="section-header">
+        <div class="section-title-text">Let's Learn A B C!</div>
+        <div class="section-sub" id="alpha-lang-label">Tap a card to hear it!</div>
+      </div>
+      <div class="alpha-grid" id="alphaGrid"></div>
+    </div>
+
+    <!-- NUMBERS -->
+    <div class="section" id="sec-numbers">
+      <div class="section-header">
+        <div class="section-title-text">Count with Me! 1-2-3</div>
+        <div class="section-sub" id="num-lang-label">Tap to count!</div>
+      </div>
+      <div class="numbers-grid" id="numGrid"></div>
+    </div>
+
+    <!-- COLORS -->
+    <div class="section" id="sec-colors">
+      <div class="section-header">
+        <div class="section-title-text">Rainbow Colors! 🌈</div>
+        <div class="section-sub" id="color-lang-label">Tap to learn colors!</div>
+      </div>
+      <div class="colors-grid" id="colorGrid"></div>
+    </div>
+
+    <!-- ANIMALS -->
+    <div class="section" id="sec-animals">
+      <div class="section-header">
+        <div class="section-title-text">Meet the Animals! 🦁</div>
+        <div class="section-sub" id="animal-lang-label">Tap an animal!</div>
+      </div>
+      <div class="animals-grid" id="animalGrid"></div>
+    </div>
+
+    <!-- QUIZ -->
+    <div class="section" id="sec-quiz">
+      <div class="section-header">
+        <div class="section-title-text">Quiz Time! 🧠</div>
+      </div>
+      <div class="quiz-container">
+        <div class="quiz-scorebar">
+          <div class="quiz-score-pill">⭐ <span id="quizScore">0</span> pts</div>
+          <div class="quiz-progress">Q <span id="quizNum">1</span>/10</div>
+          <div class="quiz-stars" id="scoreStars">☆☆☆☆☆</div>
+        </div>
+        <div class="quiz-type-tabs">
+          <button class="qtype-btn active" data-qtype="alphabets">🔤 ABC</button>
+          <button class="qtype-btn" data-qtype="numbers">🔢 123</button>
+          <button class="qtype-btn" data-qtype="colors">🎨 Colors</button>
+          <button class="qtype-btn" data-qtype="animals">🐘 Animals</button>
+        </div>
+        <div class="quiz-card">
+          <div class="quiz-img-wrap">
+            <span class="quiz-image" id="quizImage">🍎</span>
+          </div>
+          <div class="quiz-question" id="quizQuestion">Loading...</div>
+          <div class="quiz-options" id="quizOptions"></div>
+          <div class="quiz-feedback" id="quizFeedback"></div>
+          <button class="quiz-next-btn" id="quizNextBtn" style="display:none">Next ➡️</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- DRAWING -->
+    <div class="section" id="sec-drawing">
+      <div class="section-header">
+        <div class="section-title-text">Be a Little Artist! 🎨</div>
+      </div>
+      <div class="drawing-area">
+        <div class="drawing-toolbar">
+          <div class="toolbar-row">
+            <div class="toolbar-group">
+              <div class="toolbar-label">Tools</div>
+              <div class="toolbar-btns">
+                <button class="draw-tool-btn active" data-tool="pen" title="Pen">🖊️</button>
+                <button class="draw-tool-btn" data-tool="brush" title="Brush">🖌️</button>
+                <button class="draw-tool-btn" data-tool="spray" title="Spray">💨</button>
+                <button class="draw-tool-btn" data-tool="eraser" title="Eraser">⬜</button>
+                <button class="draw-tool-btn" data-tool="fill" title="Fill">🪣</button>
+              </div>
+            </div>
+            <div class="toolbar-group">
+              <div class="toolbar-label">Shapes</div>
+              <div class="toolbar-btns">
+                <button class="draw-tool-btn" data-tool="circle" title="Circle">⭕</button>
+                <button class="draw-tool-btn" data-tool="rect" title="Box">🟦</button>
+                <button class="draw-tool-btn" data-tool="triangle" title="Triangle">🔺</button>
+                <button class="draw-tool-btn" data-tool="star" title="Star">⭐</button>
+                <button class="draw-tool-btn" data-tool="line" title="Line">📏</button>
+              </div>
+            </div>
+          </div>
+          <div class="toolbar-row">
+            <div class="toolbar-group flex-grow">
+              <div class="toolbar-label">Color</div>
+              <div class="color-palette" id="colorPalette"></div>
+            </div>
+            <div class="toolbar-group">
+              <div class="toolbar-label">Size</div>
+              <input type="range" class="size-slider" id="brushSize" min="2" max="40" value="8">
+            </div>
+          </div>
+          <div class="toolbar-row toolbar-actions">
+            <button class="action-btn clear-btn" id="clearBtn">🗑️ Clear</button>
+            <button class="action-btn undo-btn"  id="undoBtn">↩️ Undo</button>
+            <button class="action-btn save-btn"  id="saveBtn">💾 Save</button>
+          </div>
+        </div>
+        <canvas id="drawCanvas"></canvas>
+        <p class="draw-hint">🖐️ Use your finger or mouse to draw!</p>
+      </div>
+    </div>
+
+    <!-- SCRIPTS -->
+    <div class="section" id="sec-scripts">
+      <div class="section-header">
+        <div class="section-title-text">Hindi &amp; Kannada Scripts! 🔡</div>
+      </div>
+      <div class="script-sub-tabs">
+        <button class="script-tab active" data-script="hindi">🇮🇳 Hindi हिन्दी</button>
+        <button class="script-tab" data-script="kannada">🇮🇳 Kannada ಕನ್ನಡ</button>
+      </div>
+      <div class="script-grid" id="scriptsGrid"></div>
+    </div>
+
+    <!-- AWARDS -->
+    <div class="section" id="sec-awards">
+      <div class="awards-dashboard">
+        <div class="awards-hero">
+          <div class="awards-hero-emoji">🏆</div>
+          <div class="awards-hero-title">My Trophy Room!</div>
+          <div class="awards-star-row" id="dashStars">⭐⭐⭐</div>
+          <div class="awards-count"><span id="dashStarCount">0</span> Stars Collected!</div>
+        </div>
+        <div class="badges-title">🏅 My Badges</div>
+        <div class="badges-grid" id="badgesGrid"></div>
+        <div class="progress-section">
+          <div class="progress-title">📊 My Progress</div>
+          <div class="progress-row">
+            <div class="progress-info">
+              <span>✅ Correct Answers</span><span id="progCorrect">0</span>
+            </div>
+            <div class="progress-bar"><div class="progress-fill green" id="pfCorrect"></div></div>
+          </div>
+          <div class="progress-row">
+            <div class="progress-info">
+              <span>⭐ Stars Earned</span><span id="progStars">0</span>
+            </div>
+            <div class="progress-bar"><div class="progress-fill yellow" id="pfStars"></div></div>
+          </div>
+          <div class="progress-row">
+            <div class="progress-info">
+              <span>🌍 Sections Visited</span><span id="progSections">0/7</span>
+            </div>
+            <div class="progress-bar"><div class="progress-fill blue" id="pfSections"></div></div>
+          </div>
+          <div class="progress-row">
+            <div class="progress-info">
+              <span>🏅 Badges Earned</span><span id="progBadges">0/6</span>
+            </div>
+            <div class="progress-bar"><div class="progress-fill purple" id="pfBadges"></div></div>
+          </div>
+        </div>
+        <div class="awards-actions">
+          <button class="switch-btn" onclick="doLogout()">🔄 Switch User</button>
+        </div>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal-box" id="modalBox">
+    <div class="modal-emoji" id="modalEmoji">🍎</div>
+    <div class="modal-title" id="modalTitle">Apple</div>
+    <div class="modal-trans" id="modalTrans">सेब</div>
+    <div class="modal-desc" id="modalDesc">A is for Apple!</div>
+    <button class="modal-close" id="modalClose">Got it! ✓</button>
+  </div>
+</div>
+
+<!-- AWARD TOAST -->
+<div class="award-toast" id="awardToast">
+  <div class="award-toast-inner">
+    <span class="award-toast-icon" id="awardIcon">🏆</span>
+    <div>
+      <div class="award-toast-title" id="awardTitle">Champion!</div>
+      <div class="award-toast-sub" id="awardSub">You earned a badge!</div>
+    </div>
+  </div>
+</div>
+
+<button class="scroll-top" id="scrollTopBtn">↑</button>
+
+<script src="app.js"></script>
+</body>
+</html>
